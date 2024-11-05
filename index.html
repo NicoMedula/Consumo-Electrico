@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Eléctrica</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Consumo Eléctrico</h1>
+        
+        <form id="calculatorForm">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" required>
+            </div>
+
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" required>
+            </div>
+
+            <div class="form-group">
+                <label for="tipoConsumidor">Tipo de Consumidor:</label>
+                <select id="tipoConsumidor">
+                    <option value="Residencial">Residencial</option>
+                    <option value="Comercial">Comercial</option>
+                    <option value="Industrial">Industrial</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="consumo">Consumo mensual (kWh):</label>
+                <input type="number" id="consumo" required min="0" step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="factorPotencia">Factor de potencia (0-1):</label>
+                <input type="number" id="factorPotencia" required min="0" max="1" step="0.01" value="0.8">
+            </div>
+
+            <button type="submit">Calcular</button>
+        </form>
+
+        <div class="results" id="results">
+            <h2>Resultados</h2>
+            <div class="result-item">
+                <strong>Cliente:</strong> <span id="clienteNombre"></span>
+            </div>
+            <div class="result-item">
+                <strong>Tipo de consumidor:</strong> <span id="tipoConsumidorResult"></span>
+            </div>
+            <div class="result-item">
+                <strong>Consumo:</strong> <span id="consumoResult"></span> kWh
+            </div>
+            <div class="result-item">
+                <strong>Monto a pagar:</strong> $<span id="montoResult"></span>
+            </div>
+            <div class="result-item">
+                <strong>Corriente:</strong> <span id="corrienteResult"></span> A
+            </div>
+            <div class="result-item">
+                <strong>Capacitor sugerido:</strong> <span id="capacitorResult"></span> µF
+            </div>
+
+            <button class="export-btn" id="exportBtn">Exportar a Excel</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
