@@ -80,3 +80,37 @@ function calcular() {
     // Mostrar sección de resultados
     document.getElementById('results').classList.add('show');
 }
+
+document.getElementById('exportBtn').addEventListener('click', function() {
+    // Crear datos para Excel
+    const data = [
+        {
+            'Fecha': new Date().toLocaleString(),
+            'Nombre': document.getElementById('nombre').value,
+            'Apellido': document.getElementById('apellido').value,
+            'Tipo Consumidor': document.getElementById('tipoConsumidor').value,
+            'Consumo (kWh)': parseFloat(document.getElementById('consumo').value),
+            'Factor de Potencia': parseFloat(document.getElementById('factorPotencia').value),
+            'Cargo Fijo': parseFloat(document.getElementById('montoFijoResult').textContent),
+            'Consumo primeros 600 kWh': parseFloat(document.getElementById('monto600Result').textContent),
+            'Excedente 142 kWh': parseFloat(document.getElementById('montoExcedente142Result').textContent),
+            'Excedente 43 kWh': parseFloat(document.getElementById('montoExcedente43Result').textContent),
+            'Excedente 503 kWh': parseFloat(document.getElementById('montoExcedente503Result').textContent),
+            'Subsidio': parseFloat(document.getElementById('subsidioResult').textContent),
+            'Alumbrado Público': parseFloat(document.getElementById('alumbradoResult').textContent),
+            'IVA (21%)': parseFloat(document.getElementById('ivaResult').textContent),
+            'Total Bimestral': parseFloat(document.getElementById('totalResult').textContent),
+            'Corriente (A)': parseFloat(document.getElementById('corrienteResult').textContent),
+            'Capacitor (µF)': parseFloat(document.getElementById('capacitorResult').textContent)
+        }
+    ];
+
+    // Crear workbook y hoja de cálculo
+    const ws = XLSX.utils.json_to_sheet(data);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Consumos");
+
+    // Guardar archivo Excel
+    const fileName = `consumos_electricos_${new Date().toISOString().split('T')[0]}.xlsx`;
+    XLSX.writeFile(wb, fileName);
+});
